@@ -1,5 +1,7 @@
 # ITMPA
-Image To Minecraft Pixel Art by Chubby Unicorn
+Image To Minecraft Pixel Art 
+
+by Chubby Unicorn
 
 I, me, my refers to Chubby Unicorn
 
