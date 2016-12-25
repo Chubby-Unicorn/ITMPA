@@ -254,9 +254,27 @@ Unused:
         Dim world As New ImportExport.Schematic(IMGSize.Width + 1, IMGSize.Height + 1, 1)
         For y = 0 To IMGSize.Height
             For x = 0 To IMGSize.Width
-                world.Blocks.SetBlock(x, y, 0, New AlphaBlock(Img(x, y).Block, Img(x, y).Data)) ' should make a structure
+                world.Blocks.SetBlock(x, y, 0, New AlphaBlock(Img(x, y).Block, Img(x, y).Data)) 'Should make a structure
             Next x
         Next y
+        If Form1.SaveSchematic.ShowDialog() = DialogResult.OK Then
+            world.Export(Form1.SaveSchematic.FileName)
+        End If
+    End Sub
+
+    Public Sub makeSchematicFlat()
+        Dim world As New ImportExport.Schematic(IMGSize.Width + 1, 1, IMGSize.Height + 1)
+        For z = 0 To IMGSize.Height
+            For x = 0 To IMGSize.Width
+                Dim B, D As Byte
+                B = Img(x, z).Block
+                D = Img(x, z).Data
+                If (B = 17) Or (B = 162) Or (B = 170) Then 'Corrects the tiles
+                    D = D + 8
+                End If
+                world.Blocks.SetBlock(x, 0, z, New AlphaBlock(B, D)) 'Should make a structure
+            Next x
+        Next z
         If Form1.SaveSchematic.ShowDialog() = DialogResult.OK Then
             world.Export(Form1.SaveSchematic.FileName)
         End If
